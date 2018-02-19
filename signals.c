@@ -47,8 +47,7 @@ void catch_tstp(int sig_num)
 
 void sig_handler(int signo)
 {
-  if (signo == SIGINT)
-    printf("received SIGINT\n");
+  return;
 }
 
 int main(int argc, char* argv[])
@@ -60,9 +59,9 @@ int main(int argc, char* argv[])
 
   /* set signal handlers */
 
-   if (signal(SIGINT, sig_handler) == SIG_ERR)
+   if (signal(SIGINT, catch_int) == SIG_ERR)
         printf("\ncan't catch SIGINT\n");
-while(1)
+  while(1)
     sleep(1);
   // alarm( );s
   // sigdelset();
