@@ -14,6 +14,9 @@ void catch_int(int sig_num)
   /* increase count, and check if threshold was reached */
   got_response = 0;
   ctrl_c_count++;
+
+  alarm(10);
+
   if (ctrl_c_count >= CTRL_C_THRESHOLD) {
     char answer[30];
 
@@ -57,11 +60,10 @@ static void alarmHandler(int signo){
     if(got_response)
       return;
 
-    printf("\nExiting...\n");
-      fflush(stdout);
-      exit(0);
-    // alarm(10);
-    // printf("Exiting due to inactivity.\n");
+    printf("Exiting due to inactivity.\n");
+    fflush(stdout);
+    exit(0);
+
 }
 
 int main(int argc, char* argv[])
@@ -72,7 +74,7 @@ int main(int argc, char* argv[])
   /* setup mask_set */
 
   /* set signal handlers */
-  alarm(10);
+  // alarm(10);
 
 
    if (signal(SIGINT, catch_int) == SIG_ERR)
