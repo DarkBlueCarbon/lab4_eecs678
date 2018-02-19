@@ -48,6 +48,12 @@ void catch_tstp(int sig_num)
 void sig_handler(int signo)
 {
   return;
+
+}
+
+static void alarmHandler(int signo){
+    printf("Exiting due to inactivity.\n");
+
 }
 
 int main(int argc, char* argv[])
@@ -59,8 +65,14 @@ int main(int argc, char* argv[])
 
   /* set signal handlers */
 
+  alarm(5);
+
    if (signal(SIGINT, catch_int) == SIG_ERR)
         printf("\ncan't catch SIGINT\n");
+
+   if (signal(SIGINT, catch_tstp) == SIG_ERR)
+        printf("\ncan't catch SIGINT\n");
+
   while(1)
     sleep(1);
   // alarm( );s
