@@ -57,8 +57,11 @@ static void alarmHandler(int signo){
     if(got_response)
       return;
 
-    alarm(10);
-    printf("Exiting due to inactivity.\n");
+    printf("\nExiting...\n");
+      fflush(stdout);
+      exit(0);
+    // alarm(10);
+    // printf("Exiting due to inactivity.\n");
 }
 
 int main(int argc, char* argv[])
@@ -69,7 +72,7 @@ int main(int argc, char* argv[])
   /* setup mask_set */
 
   /* set signal handlers */
-
+  alarm(10);
 
 
    if (signal(SIGINT, catch_int) == SIG_ERR)
@@ -78,7 +81,7 @@ int main(int argc, char* argv[])
    if (signal(SIGTSTP, catch_tstp) == SIG_ERR)
         printf("\ncan't catch SIGINT\n");
 
-  // if (signal(SIGINT, alarmHandler) == SIG_ERR)
+  // if (signal(SIGALRM, alarmHandler) == SIG_ERR)
   //       printf("\ncan't catch SIGINT\n");
 
   while(1)
