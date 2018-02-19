@@ -45,6 +45,12 @@ void catch_tstp(int sig_num)
   fflush(stdout);
 }
 
+void sig_handler(int signo)
+{
+  if (signo == SIGINT)
+    printf("received SIGINT\n");
+}
+
 int main(int argc, char* argv[])
 {
   struct sigaction sa;
@@ -53,6 +59,12 @@ int main(int argc, char* argv[])
   /* setup mask_set */
 
   /* set signal handlers */
+
+   if (signal(SIGINT, sig_handler) == SIG_ERR)
+        printf("\ncan't catch SIGINT\n");
+
+  // alarm( );
+  // sigdelset();
 
   return 0;
 }
