@@ -40,6 +40,7 @@ void catch_int(int sig_num)
 /* the Ctrl-Z signal handler */
 void catch_tstp(int sig_num)
 {
+  alarm(10);
   /* print the current Ctrl-C counter */
   printf("\n\nSo far, '%d' Ctrl-C presses were counted\n\n", ctrl_c_count);
   fflush(stdout);
@@ -48,12 +49,10 @@ void catch_tstp(int sig_num)
 void sig_handler(int signo)
 {
   return;
-
 }
 
 static void alarmHandler(int signo){
     printf("Exiting due to inactivity.\n");
-
 }
 
 int main(int argc, char* argv[])
@@ -65,7 +64,7 @@ int main(int argc, char* argv[])
 
   /* set signal handlers */
 
-  alarm(5);
+
 
    if (signal(SIGINT, catch_int) == SIG_ERR)
         printf("\ncan't catch SIGINT\n");
