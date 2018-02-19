@@ -75,8 +75,8 @@ int main(int argc, char* argv[])
    if (signal(SIGINT, catch_int) == SIG_ERR)
         printf("\ncan't catch SIGINT\n");
 
-   if (signal(SIGINT, catch_tstp) == SIG_ERR)
-        printf("\ncan't catch SIGINT\n");
+  //  if (signal(SIGINT, catch_tstp) == SIG_ERR)
+  //       printf("\ncan't catch SIGINT\n");
 
   // if (signal(SIGINT, alarmHandler) == SIG_ERR)
   //       printf("\ncan't catch SIGINT\n");
