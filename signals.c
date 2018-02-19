@@ -15,7 +15,7 @@ void catch_int(int sig_num)
   got_response = 0;
   ctrl_c_count++;
 
-  alarm(10);
+
 
   if (ctrl_c_count >= CTRL_C_THRESHOLD) {
     char answer[30];
@@ -25,6 +25,9 @@ void catch_int(int sig_num)
     printf("\nReally exit? [Y/n]: ");
     fflush(stdout);
     fgets(answer, sizeof(answer), stdin);
+
+    alarm(10);
+
     if (answer[0] == 'n' || answer[0] == 'N') {
       printf("\nContinuing\n");
       fflush(stdout);
