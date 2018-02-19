@@ -6,7 +6,7 @@
 /* first, define the Ctrl-C counter, initialize it with zero. */
 int ctrl_c_count = 0;
 int got_response = 0;
-#define CTRL_C_THRESHOLD  5 
+#define CTRL_C_THRESHOLD  5
 
 /* the Ctrl-C signal handler */
 void catch_int(int sig_num)
