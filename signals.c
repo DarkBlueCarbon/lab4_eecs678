@@ -19,14 +19,14 @@ void catch_int(int sig_num)
 
   if (ctrl_c_count >= CTRL_C_THRESHOLD) {
     char answer[30];
-
+    alarm(10);
     /* prompt the user to tell us if to really
      * exit or not */
     printf("\nReally exit? [Y/n]: ");
     fflush(stdout);
     fgets(answer, sizeof(answer), stdin);
 
-    alarm(10);
+
 
     if (answer[0] == 'n' || answer[0] == 'N') {
       printf("\nContinuing\n");
