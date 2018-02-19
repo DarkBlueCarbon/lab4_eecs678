@@ -12,6 +12,7 @@ int got_response = 0;
 void catch_int(int sig_num)
 {
   /* increase count, and check if threshold was reached */
+  got_response = 0;
   ctrl_c_count++;
   if (ctrl_c_count >= CTRL_C_THRESHOLD) {
     char answer[30];
@@ -28,6 +29,7 @@ void catch_int(int sig_num)
        * Reset Ctrl-C counter
        */
       ctrl_c_count = 0;
+      got_response = 1;
     }
     else {
       printf("\nExiting...\n");
@@ -40,7 +42,7 @@ void catch_int(int sig_num)
 /* the Ctrl-Z signal handler */
 void catch_tstp(int sig_num)
 {
-  alarm(10);
+
   /* print the current Ctrl-C counter */
   printf("\n\nSo far, '%d' Ctrl-C presses were counted\n\n", ctrl_c_count);
   fflush(stdout);
@@ -52,6 +54,10 @@ void sig_handler(int signo)
 }
 
 static void alarmHandler(int signo){
+    if(got_response)
+      return;
+
+    alarm(10);
     printf("Exiting due to inactivity.\n");
 }
 
@@ -59,7 +65,7 @@ int main(int argc, char* argv[])
 {
   struct sigaction sa;
   sigset_t mask_set;  /* used to set a signal masking set. */
-
+  got_response = 1;
   /* setup mask_set */
 
   /* set signal handlers */
