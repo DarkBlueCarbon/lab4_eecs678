@@ -86,12 +86,12 @@ int main(int argc, char* argv[])
    if (signal(SIGTSTP, catch_tstp) == SIG_ERR)
         printf("\ncan't catch SIGINT\n");
 
-  // if (signal(SIGALRM, alarmHandler) == SIG_ERR)
-  //       printf("\ncan't catch SIGINT\n");
+  if (signal(SIGALRM, alarmHandler) == SIG_ERR)
+        printf("\ncan't catch SIGINT\n");
 
   while(1)
     sleep(1);
-  // alarm( );s
+  // alarm();s
   // sigdelset();
 
   return 0;
